@@ -18,5 +18,9 @@ export default function RoomFiltrer() {
     pets,
   } = context;
 
-  return <section className="filter-container"></section>;
+  return (
+    <section className="filter-container">
+      this is the Filtering section
+    </section>
+  );
 }
