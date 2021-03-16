@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
-import { RoomConsumer, RoomContex } from "../Context";
+import { RoomContext } from "../Context";
+
 import Title from "../components/Title";
 
 // get all unique values
@@ -9,14 +10,14 @@ const getUnique = (items, value) => {
 };
 
 export default function RoomFiltrer({ rooms }) {
-  const context = useContext(RoomConsumer);
+  const context = useContext(RoomContext);
   const {
     handleChange,
     type,
     capacity,
     price,
     minPrice,
-    MaxPrice,
+    maxPrice,
     minSize,
     maxSize,
     breakfast,
@@ -51,7 +52,7 @@ export default function RoomFiltrer({ rooms }) {
       <form className="filter-form">
         {/*Select type*/}
         <div className="form-group">
-          <lable htmlFor="type">Room Type</lable>
+          <label htmlFor="type">Room Type</label>
           <select
             name="type"
             id="type"
@@ -65,7 +66,7 @@ export default function RoomFiltrer({ rooms }) {
         {/*End of select type*/}
         {/*Guest*/}
         <div className="form-group">
-          <lable htmlFor="capacity">Guest</lable>
+          <label htmlFor="capacity">Guest</label>
           <select
             name="capacity"
             id="capacity"
@@ -79,12 +80,12 @@ export default function RoomFiltrer({ rooms }) {
         {/*End of Guest*/}
         {/*room price */}
         <div className="form-group">
-          <lable htmlFor="price">Room Price ${price}</lable>
+          <label htmlFor="price">Room Price ${price}</label>
           <input
             type="range"
             name="price"
             min={minPrice}
-            max={MaxPrice}
+            max={maxPrice}
             id="price"
             value={price}
             onChange={handleChange}

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import items from "./data";
 
-const RoomContext = React.createContext();
+const RoomContext = createContext();
 
 class RoomProvider extends Component {
   state = {
@@ -19,15 +19,14 @@ class RoomProvider extends Component {
     breakfast: false,
     pets: false,
   };
-
   // getting the data
 
   componentDidMount() {
     let rooms = this.formatData(items);
     let featuredRooms = rooms.filter((room) => room.featured === true);
-    const maxPrice = Math.max(...items.map((item) => item.price));
+    const maxPrice = Math.max(...rooms.map((item) => item.price));
     const maxSize = Math.max(...items.map((item) => item.size));
-
+    // console.log(items);
     this.setState({
       rooms, //or we can alse write      rooms : rooms      ES7 notation
       featuredRooms,
@@ -60,7 +59,7 @@ class RoomProvider extends Component {
     const value =
       event.target.type === "checkbox" ? target.checked : target.value;
     const name = event.target.name;
-    console.log(name, value);
+    // console.log(name, value);
 
     this.setState(
       {
