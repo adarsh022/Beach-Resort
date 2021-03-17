@@ -25,7 +25,7 @@ class RoomProvider extends Component {
     let rooms = this.formatData(items);
     let featuredRooms = rooms.filter((room) => room.featured === true);
     const maxPrice = Math.max(...rooms.map((item) => item.price));
-    const maxSize = Math.max(...items.map((item) => item.size));
+    const maxSize = Math.max(...rooms.map((item) => item.size));
     // console.log(items);
     this.setState({
       rooms, //or we can alse write      rooms : rooms      ES7 notation
@@ -56,8 +56,7 @@ class RoomProvider extends Component {
 
   handleChange = (event) => {
     const target = event.target;
-    const value =
-      event.target.type === "checkbox" ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = event.target.name;
     // console.log(name, value);
 
@@ -94,7 +93,25 @@ class RoomProvider extends Component {
     if (capacity !== 1) {
       tempRooms = tempRooms.filter((room) => room.capacity >= capacity);
     }
+    // filter by price
+    tempRooms = tempRooms.filter((room) => room.price <= price);
 
+    // filter by size
+    tempRooms = tempRooms.filter(
+      (room) => room.size >= minSize && room.size <= maxSize
+    );
+
+    // filter by breakfast
+    if (breakfast) {
+      tempRooms = tempRooms.filter((room) => room.breakfast === true);
+    }
+
+    // filter by pets
+    if (pets) {
+      tempRooms = tempRooms.filter((room) => room.pets === true);
+    }
+
+    // change state
     this.setState({
       sortedRooms: tempRooms,
     });
